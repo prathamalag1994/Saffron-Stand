@@ -29,6 +29,8 @@ group :development,:test do
   gem 'cucumber-rails', :require => false
 end
 
+gem 'rake'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
