@@ -22,14 +22,27 @@ end
 gem 'jquery-rails'
 gem 'devise'
 
-group :development,:test do  
-  gem 'database_cleaner'
+group :development, :test do  
   gem 'sqlite3'
   gem 'debugger'
+  gem 'rspec-rails', '~> 2.14.0'
+end
+group :development, :test do
+end
+group :test do
   gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner' 
+  gem 'capybara'
+  gem 'launchy'
+  gem 'spork'
+  gem 'simplecov', :require => false, :group => :test
+  gem 'rspec'
 end
 
 gem 'rake'
+gem 'haml'
+gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

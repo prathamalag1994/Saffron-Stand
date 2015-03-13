@@ -1,5 +1,10 @@
 Saffron::Application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "registrations"}
+
+namespace :admin do
+  resources :items
+end
+
+  devise_for :users
   get "/items/lunch", to: "items#lunch"
   get "/items/breakfast", to: "items#breakfast"
   get "/items/dinner", to: "items#dinner"
