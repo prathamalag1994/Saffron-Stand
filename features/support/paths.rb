@@ -21,26 +21,68 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    when /^the Breakfast Menu page/i 
+      '/items/breakfast'
 
-    when /^the Sign In page/
+    when /^the Sign In page/i
       '/users/sign_in'
 
-    when /^the Menu page/
+    when /^the Menu page/i
       '/menu'
 
-    when /^the Admin Items Index page/
+    when /^the admin home page/i
+      '/admin/welcome'
+
+    when /^the Admin Items Index page/i
       '/admin/items'
 
-    when /^the Admin New Item page/
+    when /^the Admin New Item page/i
       '/admin/items/new'
 
-    when /^the details page for "(.*)"/
+    when /^the Admin Settings page/i
+      '/admin/settings'
+
+    when /^the details page for "(.*)"/i
       @item = Item.find_by_name($1)
       admin_item_path(@item)
 
-    when /^the edit page for "(.*)"/
+    when /^the edit item page for "(.*)"/i
       @item = Item.find_by_name($1)
       edit_admin_item_path(@item)
+
+    when /^the edit menu page for "(.*)"/i
+      @menu = Menu.find_by_name($1)
+      edit_admin_menu_path(@menu)
+
+    when /^the New Event page/i
+      '/events/new'
+
+    when /^the sample menu page/i
+      '/menus/sample_menus'
+
+    when /^the New Sample Menu page/i
+      '/admin/menus/new'
+
+    when /^the Admin Sample Menus page/i
+      '/admin/menus'
+
+    when /^the admin settings add admin page/i
+      '/users/non_admin'
+
+    when /^the Custom Order page/i
+      '/events/custom_order'
+
+    when /^the Show Event page/i
+      '/events/show'
+
+    when /^the Saved Orders page/i
+      '/events/view_saved'
+
+    when /^the Admin Events page/i
+      '/admin/events'
+
+    when /^the confirmation page/i
+      '/events/submit'
 
     else
       begin

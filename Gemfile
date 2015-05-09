@@ -21,6 +21,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'mandrill-api'
 
 group :development, :test do  
   gem 'sqlite3'
@@ -43,6 +44,11 @@ end
 gem 'rake'
 gem 'haml'
 gem 'factory_girl_rails'
+gem 'paperclip'
+gem 'dropbox'
+gem "paperclip-dropbox", ">= 1.1.7"
+gem 'figaro'
+gem "combined_time_select", "~> 0.0.1"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

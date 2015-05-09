@@ -1,5 +1,9 @@
 # Source: https://github.com/plataformatec/devise/wiki/How-To:-Test-with-Cucumber
 
+Given /^I logged out/ do
+  click_link "Logout"
+end
+
 Given /^I am not authenticated$/ do
   visit('/users/sign_out') # ensure that at least
 end
@@ -16,7 +20,7 @@ Given /^I am a new, authenticated user$/ do
   visit '/users/sign_in'
   fill_in "user_email", :with => email
   fill_in "user_password", :with => password
-  click_button "Log in"
+  click_button "Sign in"
 
 end
 
@@ -28,6 +32,6 @@ Given /^I am a new, authenticated admin user$/ do
   visit '/users/sign_in'
   fill_in "user_email", :with => email
   fill_in "user_password", :with => password
-  click_button "Log in"
+  click_button "Sign in"
 
 end

@@ -1,20 +1,38 @@
 Saffron::Application.routes.draw do
 
-namespace :admin do
-  resources :items
-end
+  get "admin/process"
+
+  get '/events/structure/:event_type/:budget_per_person', to: 'events#structure'
+
+  post "events/submit", to: "events#submit"
+
+  get "/events/custom_order", to: "events#custom_order"
+  match "/events/save_order", to: "events#save_order"
+  get "/events/view_saved", to: "events#view_saved"
+  get "/admin/settings", to: "admin/settings#index"
+  get "/admin/welcome", to: "admin/welcome#index"
+  get "/admin/events/change/:id", to: "admin/events#change"
+  get "/admin/events/finalize/:id", to: "admin/events#finalize"
+  namespace :admin do
+    resources :items, :menus, :events, :menu_structures
+  end
+
+
 
   devise_for :users
   get "/items/lunch", to: "items#lunch"
-  get "/items/breakfast", to: "items#breakfast"
+  get "/items/brunch", to: "items#brunch"
   get "/items/dinner", to: "items#dinner"
-  resources :items, :except => :show
-
-
+  
+  resources :items
+  resources :events
   get "welcome/index"
   match '/home' => 'welcome#index'
   match '/menu' => 'items#index'
 
+  get '/menus/sample_menus', to: 'menus#sample_menus'
+  get '/users/non_admin', to: 'users#non_admin'
+  get '/users/add_admin/:id', to: 'users#add_admin'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

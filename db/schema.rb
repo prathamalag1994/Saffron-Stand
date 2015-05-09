@@ -11,15 +11,65 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150308031006) do
+ActiveRecord::Schema.define(:version => 20150507011512) do
+
+  create_table "categories", :force => true do |t|
+    t.string  "name"
+    t.integer "item_id"
+  end
+
+  create_table "events", :force => true do |t|
+    t.string  "event_type"
+    t.integer "head_count"
+    t.integer "user_id"
+    t.string  "status"
+    t.time    "phone_availability_start", :limit => 255
+    t.time    "phone_availability_end"
+    t.string  "comments"
+    t.integer "addi"
+  end
 
   create_table "items", :force => true do |t|
     t.string   "name"
     t.text     "desc"
     t.decimal  "price"
     t.string   "category"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "food_type"
+    t.boolean  "vegetarian"
+  end
+
+  create_table "items_menus", :id => false, :force => true do |t|
+    t.integer "menu_id"
+    t.integer "item_id"
+  end
+
+  add_index "items_menus", ["item_id"], :name => "index_items_menus_on_item_id"
+  add_index "items_menus", ["menu_id", "item_id"], :name => "index_items_menus_on_menu_id_and_item_id"
+
+  create_table "menu_structures", :force => true do |t|
+    t.string  "event_type"
+    t.integer "budget_per_person"
+    t.integer "num_appetizers",    :default => 0
+    t.integer "num_sides",         :default => 0
+    t.integer "num_entrees",       :default => 0
+    t.integer "num_desserts",      :default => 0
+    t.integer "user_id"
+  end
+
+  add_index "menu_structures", ["event_type", "budget_per_person"], :name => "index_menu_structures_on_event_type_and_budget_per_person", :unique => true
+
+  create_table "menus", :force => true do |t|
+    t.string  "name"
+    t.integer "budget_per_person"
+    t.integer "event_id"
+    t.integer "menu_structure_id"
+    t.boolean "sample"
   end
 
   create_table "users", :force => true do |t|

@@ -1,19 +1,27 @@
 class ItemsController < ApplicationController
 
 	def index
-		@items = Item.all
+		redirect_to items_brunch_path
 	end
 
-	def breakfast
-		@items = Item.where(category: 'Breakfast')
+	def show
+		@item = Item.find(params[:id])
+		if request.xhr?
+			render(:partial => 'item', :object => @item) and return
+		end
+		redirect_to :back
+	end
+
+	def brunch
+		@items = Item.all.select {|e| e.categories_names.include? "Brunch"}
 	end
 
 	def lunch
-		@items = Item.where(category: 'Lunch')
+		@items = Item.all.select {|e| e.categories_names.include? "Lunch"}
 	end
 
 	def dinner
-		@items = Item.where(category: 'Dinner')
+		@items = Item.all.select {|e| e.categories_names.include? "Dinner"}
 	end
 
 end

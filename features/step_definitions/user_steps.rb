@@ -1,5 +1,11 @@
 # Source: https://github.com/RailsApps/rails3-devise-rspec-cucumber/blob/master/features/step_definitions/user_steps.rb#L1
 
+Given /the following users exist/ do |users_table|
+  users_table.hashes.each do |user_hash|
+    item = User.create! user_hash
+  end
+end
+
 ### UTILITY METHODS ###
 
 def create_visitor
@@ -49,7 +55,7 @@ end
 
 ### GIVEN ###
 Given /^I am not logged in$/ do
-  visit '/users/sign_out'
+  visit destroy_user_session_path
 end
 
 Given /^I am logged in$/ do

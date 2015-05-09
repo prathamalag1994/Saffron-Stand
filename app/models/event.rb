@@ -1,0 +1,26 @@
+class Event < ActiveRecord::Base
+  attr_accessible :event_type, :head_count, :phone_availability_start, :phone_availability_end, :comments
+  has_one :menu, :dependent => :destroy
+  belongs_to :user
+
+  def show
+  	"/events/show"
+  end
+
+  def self.get_event_types
+  	['Cocktail Party','Brunch','Lunch','Dinner']
+  end
+
+  def self.null_event
+  	@@instance ||= Event.new
+  	class << @@instance
+  		def event_type
+  			"You haven't created any events yet. Click here to begin making a customized menu for your event!"
+  		end
+  		def show
+  			"/events/new"
+  		end
+  	end
+  	@@instance
+  end
+end
